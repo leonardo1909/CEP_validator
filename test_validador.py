@@ -43,7 +43,7 @@ class TestRange:
     def test_maior_9_digitos(self):
         cep = Cep('1234567890')
         assert cep.validar() is None
-    
+
     def test_6_digitos_menor_100k(self):
         cep = Cep('012345')
         assert cep.validar() is None

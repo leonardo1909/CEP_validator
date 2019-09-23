@@ -2,24 +2,19 @@ import pytest
 from validator_cep import Cep
 
 
-def test_tamanho():
-    cep = Cep('12345')
-    assert cep.validar() is None
-
-
 def test_letras():
     cep = Cep('lasdko')
-    assert cep.validar() is None
+    assert cep.validar() is False
 
 
 def test_alfanumerico():
     cep = Cep('cap123')
-    assert cep.validar() is None
+    assert cep.validar() is False
 
 
 def test_vazio():
     cep = Cep('')
-    assert cep.validar() is None
+    assert cep.validar() is False
 
 
 def test_None():
@@ -38,18 +33,27 @@ class TestRange:
 
     def test_menor_6_digitos(self):
         cep = Cep('54321')
-        assert cep.validar() is None
+        assert cep.validar() is False
 
     def test_maior_9_digitos(self):
         cep = Cep('1234567890')
-        assert cep.validar() is None
+        assert cep.validar() is False
 
     def test_6_digitos_menor_100k(self):
         cep = Cep('012345')
-        assert cep.validar() is None
+        assert cep.validar() is False
 
 
-class Testslice:
+class Testidslice:
 
     def test_alternado_pares(self):
-        pass
+        cep = Cep('121426')
+        assert cep.validar() is False
+
+    def test_valido(self):
+        cep = Cep('523563')
+        assert cep.validar() is True
+
+    def test_alternado_duplo(self):
+        cep = Cep('552523')
+        assert cep.validar() is False
